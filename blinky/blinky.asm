@@ -6,6 +6,7 @@ CKCON0      = 0x8E
 SFRPAGE     = 0xA7
 P3          = 0xB0
 ; page 0x20
+REG1CN      = 0xC6
 P3MDOUT     = 0x9C
 
 ; Interrupt vector
@@ -28,8 +29,14 @@ _start:
     clr EA                  ; disable global interrupts
     mov WDTCN,#0xDE         ; disable watchdog
     mov WDTCN,#0xAD
+
     mov SFRPAGE,#0x20
+    orl REG1CN,#0x84        ; Disable the internal voltage regulator. VREGIN
+                            ; and VDD are tied together and we use an external
+                            ; LDO. (RM 7.8)
+
     anl P3MDOUT,#0xFD       ; P3.1 is an open drain output
+
     orl CKCON0,#0x02        ; Timer 0 uses SYSCLK
     mov TMOD,#0x01          ; Timer 0 is a 16-bit timer
     setb ET0                ; enable Timer 0 interrupts
