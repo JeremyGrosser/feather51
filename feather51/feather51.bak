@@ -5,12 +5,12 @@ EELAYER END
 $Descr USLetter 11000 8500
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
-Rev ""
-Comp ""
-Comment1 ""
-Comment2 ""
+Title "FEATHER51"
+Date "2019-04-16"
+Rev "A"
+Comp "LEGITIMATE DATA COMPANY"
+Comment1 "Creative Commons Attribution-ShareAlike 4.0 International License"
+Comment2 "jeremy@synack.me"
 Comment3 ""
 Comment4 ""
 $EndDescr
