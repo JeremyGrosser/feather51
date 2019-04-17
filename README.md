@@ -9,3 +9,6 @@ FEATHER51 is an [Adafruit Feather](https://learn.adafruit.com/adafruit-feather/f
 Revision A was released to manufacturing on 2019-04-15. While we wait for that, firmware, documentation, and tooling development continues.
 
 [Schematic](feather51/feather51.pdf)
+
+![Board Front](feather51/front.jpg)
+![Board Back](feather51/back.jpg)
