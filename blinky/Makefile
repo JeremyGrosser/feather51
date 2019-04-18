@@ -1,7 +1,7 @@
 all: blinky.hex
 
 blinky.hex:
-	sdas8051 -clos blinky.asm 
+	sdas8051 -closj blinky.asm 
 	sdld -muni blinky.ihx blinky.rel
 	packihx blinky.ihx >blinky.hex
 
