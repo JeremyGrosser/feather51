@@ -1,9 +1,33 @@
-all: blinky.hex
+AS := sdas8051
+LD := sdld
+PACKIHX := packihx
 
-blinky.hex:
-	sdas8051 -closj blinky.asm 
-	sdld -muni blinky.ihx blinky.rel
-	packihx blinky.ihx >blinky.hex
+ASFLAGS := -cj
+LDFLAGS := -i
+
+TARGETS := blinky.ihx
+
+all: $(TARGETS)
+
+%.rel: %.a51
+	@echo "AS    $^"
+	$(AS) $(ASFLAGS) -o $^
+
+%.lst: %.a51
+	@echo "AS    $^"
+	$(AS) $(ASFLAGS) -l $^
+
+%.sym: %.a51
+	@echo "AS	$^"
+	$(AS) $(ASFLAGS) -s $^
+
+%.hex: %.rel
+	@echo "LD	$^"
+	$(LD) $(LDFLAGS) $@ $^
+
+%.ihx: %.hex
+	@echo "IHX	$^"
+	$(PACKIHX) $@ >$^
 
 clean:
-	rm -f *.hex *.ihx *.lst *.map *.rel *.rst *.sym
+	rm -f $(TARGETS)

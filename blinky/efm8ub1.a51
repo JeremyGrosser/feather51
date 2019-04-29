@@ -1,4 +1,4 @@
-.module blinky
+.module device
 
 ; EFM8UB1 SFRs
 WDTCN       = 0x97
@@ -35,27 +35,13 @@ _start:
                             ; and VDD are tied together and we use an external
                             ; LDO. (RM 7.8)
 
-    anl P3MDOUT,#0xFD       ; P3.1 is an open drain output
-
     orl CKCON0,#0x02        ; Timer 0 uses SYSCLK
-    mov TMOD,#0x01          ; Timer 0 is a 16-bit timer
-    setb ET0                ; enable Timer 0 interrupts
-    setb EA                 ; enable global interrupts
-    setb TR0                ; run Timer 0
 
-main:
-    mov PCON,#0x01        ; idle mode, wait for interrupt
-    mov PCON,PCON         ; dummy 3 cycle instruction
+setup_gpio:
+    anl P3MDOUT,#0xFD       ; P3.1 is an open drain output (LED)
+
+    mov SFRPAGE,#0x00
+
+    setb EA                 ; re-enable global interrupts
+
     ajmp main
-
-T0_ISR:
-    jb P3.1,led_off
-led_on:
-    setb P3.1
-    ajmp reset_timer
-led_off:
-    clr P3.1
-reset_timer:
-    mov TH0,#0xFF            ; don't use the top 8 bits of T0
-    clr TF0                  ; reset Timer 0 interrupt
-    reti
