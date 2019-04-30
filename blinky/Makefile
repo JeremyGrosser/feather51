@@ -3,25 +3,17 @@ LD := sdld
 PACKIHX := packihx
 
 ASFLAGS := -cj
-LDFLAGS := -i
+LDFLAGS := -iu
 
 TARGETS := blinky.ihx
 
 all: $(TARGETS)
 
-%.rel: %.a51
+%.rel %.lst %.sym: %.a51
 	@echo "AS    $^"
-	$(AS) $(ASFLAGS) -o $^
+	$(AS) $(ASFLAGS) -slo $^
 
-%.lst: %.a51
-	@echo "AS    $^"
-	$(AS) $(ASFLAGS) -l $^
-
-%.sym: %.a51
-	@echo "AS	$^"
-	$(AS) $(ASFLAGS) -s $^
-
-%.hex: %.rel
+%.hex %.map: %.rel
 	@echo "LD	$^"
 	$(LD) $(LDFLAGS) $@ $^
 
@@ -30,4 +22,4 @@ all: $(TARGETS)
 	$(PACKIHX) $@ >$^
 
 clean:
-	rm -f $(TARGETS)
+	rm -f $(TARGETS) *.lst *.rst *.map *.sym
