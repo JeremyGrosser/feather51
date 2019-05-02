@@ -13,13 +13,9 @@ all: $(TARGETS)
 	@echo "AS    $^"
 	$(AS) $(ASFLAGS) -slo $^
 
-%.hex %.map: %.rel
+%.ihx %.map: %.rel
 	@echo "LD	$^"
 	$(LD) $(LDFLAGS) $@ $^
-
-%.ihx: %.hex
-	@echo "IHX	$^"
-	$(PACKIHX) $@ >$^
 
 clean:
 	rm -f $(TARGETS) *.lst *.rst *.map *.sym

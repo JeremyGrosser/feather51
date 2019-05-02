@@ -23,7 +23,7 @@ _int_t0:
     .ds 5
 
 .area CSEG (ABS,CON)
-.org 0x0080 ; code starts after the interrupt vector
+.org 0x00A0 ; code starts after the interrupt vector
 
 _start:
     clr EA                  ; disable global interrupts

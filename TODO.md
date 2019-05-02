@@ -4,6 +4,7 @@ Revision A
 - Find smaller protection diodes
 - Replace reset button with a right angle variant
 - Add copper rings for clearance around mounting holes
+- Find a 12V tolerant battery charge controller or add a jumper to disable it
 
 Production image
 - FORTH interpreter on UART/USB?

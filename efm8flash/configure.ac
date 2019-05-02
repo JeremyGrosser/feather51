@@ -1,0 +1,14 @@
+AC_PREREQ([2.68])
+AC_INIT([efm8flash], [0.1.1])
+AM_INIT_AUTOMAKE([-Wall foreign subdir-objects])
+AM_SILENT_RULES([yes])
+AC_USE_SYSTEM_EXTENSIONS
+AC_CONFIG_HEADERS([config.h])
+
+AC_PROG_CC
+AM_PROG_CC_C_O
+
+PKG_CHECK_MODULES([USB], [libusb-1.0 >= 1.0])
+
+AC_CONFIG_FILES([Makefile])
+AC_OUTPUT
