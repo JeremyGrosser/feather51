@@ -14,6 +14,8 @@
 #define EFM8_BOOTLOADER_ENABLE  0xA5
 #define EFM8_BOOTLOADER_DISABLE 0x00    // THIS IS PERMANENT
 
+#define CRC16_POLY 0x1021
+
 /* AN945 7.1 */
 enum efm8_command {
     CMD_IDENT       = 0x30,
@@ -32,18 +34,6 @@ enum efm8_response {
     ERR_BADID       = 0x42,
     ERR_CRC         = 0x43,
 };
-
-#define MAXLEN 64
-#define CRC16_POLY 0x1021
-
-/*
-static void hexdump(uint8_t *str, size_t len) {
-    for(int i = 0; i < len; i++) {
-        printf("%02X ", str[i]);
-    }
-    printf("\n");
-}
-*/
 
 static uint8_t efm8_cmd(hid_device *dev, uint8_t cmd, uint8_t *data, uint8_t len) {
     uint8_t buf[256];
