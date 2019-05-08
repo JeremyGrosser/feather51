@@ -1,21 +1,25 @@
 AS := sdas8051
 LD := sdld
-PACKIHX := packihx
+OBJCOPY := objcopy
 
 ASFLAGS := -cj
 LDFLAGS := -iu
 
-TARGETS := blinky.ihx
+TARGETS := blinky.ihx blinky.bin
 
 all: $(TARGETS)
 
 %.rel %.lst %.sym: %.a51
-	@echo "AS    $^"
-	$(AS) $(ASFLAGS) -slo $^
+	@echo "AS    $@"
+	@$(AS) $(ASFLAGS) -slo $^
 
 %.ihx %.map: %.rel
-	@echo "LD	$^"
-	$(LD) $(LDFLAGS) $@ $^
+	@echo "LD    $@"
+	@$(LD) $(LDFLAGS) $@ $^
+
+%.bin: %.ihx
+	@echo "BIN   $@"
+	@$(OBJCOPY) -I ihex -O binary $< $@
 
 clean:
 	rm -f $(TARGETS) *.lst *.rst *.map *.sym
