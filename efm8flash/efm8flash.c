@@ -1,8 +1,10 @@
+#include <hidapi.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include <hidapi.h>
 #include <assert.h>
+
 
 #define EFM8UB1_USB_VID         0x10C4
 #define EFM8UB1_USB_PID         0xEAC9
@@ -14,7 +16,8 @@
 #define EFM8_BOOTLOADER_ENABLE  0xA5
 #define EFM8_BOOTLOADER_DISABLE 0x00    // THIS IS PERMANENT
 
-#define CRC16_POLY 0x1021
+#define CRC16_POLY     0x1021
+#define MAX_BLOCK_SIZE 8
 
 /* AN945 7.1 */
 enum efm8_command {
@@ -239,57 +242,94 @@ static uint16_t crc16(uint16_t acc, uint8_t input) {
 
 int main(int argc, char *argv[]) {
     hid_device *dev;
-    uint8_t *data;
-    uint16_t crc = 0x0000;
+    FILE *fp;
+    uint8_t data[MAX_BLOCK_SIZE];
+    size_t len;
+    uint16_t offset = 0x0000;
+    uint16_t crc;
+    int ret = 0;
     int err;
     int i;
+
+    if(argc < 2) {
+        fprintf(stderr, "Usage: %s <program.bin>\n", argv[0]);
+        return 1;
+    }
+
+    fp = fopen(argv[1], "r");
+    if(fp == NULL) {
+        fprintf(stderr, "File open failed\n");
+        return 2;
+    }
 
     // open HID device
     err = hid_init();
     if(err != 0) {
         fprintf(stderr, "hid_init failed\n");
-        return 1;
+        fclose(fp);
+        return 3;
     }
 
     dev = hid_open(EFM8UB1_USB_VID, EFM8UB1_USB_PID, NULL);
     if(dev == NULL) {
         fprintf(stderr, "hid_open failed\n");
-        return 1;
+        fclose(fp);
+        return 4;
     }
 
     if(efm8_version(dev) != 0) {
+        ret = 5;
         goto cleanup;
     }
 
     if(efm8_ident(dev, EFM8UB1_DEVICE_ID, EFM8UB1_DERIVATIVE_ID) != 0) {
+        ret = 6;
         goto cleanup;
     }
 
     if(efm8_setup(dev, 0x00) != 0) {
+        ret = 7;
         goto cleanup;
     }
 
-    // read intel hex from stdin
-    data = (uint8_t *)"\xff";
-    if(efm8_erase(dev, 0x0000, data, 1) != 0) {
-        goto cleanup;
-    }
+    while((len = fread(data, 1, MAX_BLOCK_SIZE, fp)) > 0) {
+        fprintf(stderr, "flashing %li bytes at 0x%04X\n", len, offset);
+        if(efm8_erase(dev, offset, data, len) != 0) {
+            fprintf(stderr, "erase failed at offset 0x%04X\n", offset);
+            ret = 8;
+            goto cleanup;
+        }
 
-    for(i = 0; i < 1; i++) {
-        crc = crc16(crc, data[i]);
-    }
+        crc = 0x0000;
+        for(i = 0; i < len; i++) {
+            crc = crc16(crc, data[i]);
+        }
 
-    if(efm8_verify(dev, 0x0000, 0x0000, crc) != 0) {
+        if(efm8_verify(dev, offset, offset+len-1, crc) != 0) {
+            fprintf(stderr, "verify failed at offset 0x%04X\n", offset);
+            ret = 9;
+            goto cleanup;
+        }
+
+        offset += len;
+    }
+    if(ferror(fp) != 0) {
+        fprintf(stderr, "Error reading file\n");
+        ret = 10;
         goto cleanup;
+    }else{
+        fprintf(stdout, "%d bytes flashed successfully!\n", offset);
     }
     
 cleanup:
     hid_close(dev);
+    fclose(fp);
     
     err = hid_exit();
     if(err != 0) {
         fprintf(stderr, "hid_exit returned error %d\n", err);
         return 1;
     }
-    return 0;
+
+    return ret;
 }
