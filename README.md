@@ -8,7 +8,7 @@ FEATHER51 is an [Adafruit Feather](https://learn.adafruit.com/adafruit-feather/f
 
 # Project status
 
-Ten revision A boards have been manufactured and are currently undergoing testing/development. The efm8flash utility is being developed as a portable open source flash programming tool for the factory USB bootloader. It has bugs.
+Ten revision A boards have been manufactured and tested with no known defects. The efm8flash utility is being developed as a portable open source flash programming tool for the factory USB bootloader. It has bugs.
 
 [Schematic](feather51/feather51.pdf)
 
