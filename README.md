@@ -10,6 +10,10 @@ FEATHER51 is an [Adafruit Feather](https://learn.adafruit.com/adafruit-feather/f
 
 Ten revision A boards have been manufactured and tested with no known defects. The efm8flash utility is being developed as a portable open source flash programming tool for the factory USB bootloader. It has bugs.
 
+A small number of JLink to C2D adapter boards are available for debugging using
+the six pin header, though this adapter shouldn't be needed for most
+applications.
+
 [Schematic](feather51/feather51.pdf)
 
 ![Board Front](feather51/front.jpg)
