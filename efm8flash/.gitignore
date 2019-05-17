@@ -9,5 +9,4 @@ check_crc16
 *.log
 *.trs
 *.swp
-test-driver
 .dirstamp
