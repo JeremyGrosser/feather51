@@ -5,6 +5,8 @@
 #include <stdint.h>
 #include <assert.h>
 
+#include "crc16.h"
+
 
 #define EFM8UB1_USB_VID         0x10C4
 #define EFM8UB1_USB_PID         0xEAC9
@@ -224,22 +226,6 @@ static int efm8_version(hid_device *dev) {
     return 0;
 }
 
-static uint16_t crc16(uint16_t acc, uint8_t input) {
-    int i;
-    acc = acc ^ (input << 8);
-
-    for(i = 0; i < 8; i++) {
-        if((acc & 0x8000) == 0x8000) {
-            acc = acc << 1;
-            acc ^= CRC16_POLY;
-        }else{
-            acc = acc << 1;
-        }
-    }
-
-    return acc;
-}
-
 int main(int argc, char *argv[]) {
     hid_device *dev;
     FILE *fp;
@@ -300,12 +286,12 @@ int main(int argc, char *argv[]) {
             goto cleanup;
         }
 
-        crc = 0x0000;
+        crc = 0xFFFF;
         for(i = 0; i < len; i++) {
             crc = crc16(crc, data[i]);
         }
 
-        if(efm8_verify(dev, offset, offset+len-1, crc) != 0) {
+        if(efm8_verify(dev, offset, offset+len, crc) != 0) {
             fprintf(stderr, "verify failed at offset 0x%04X\n", offset);
             ret = 9;
             goto cleanup;

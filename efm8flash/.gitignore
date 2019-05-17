@@ -1,8 +1,13 @@
 .deps/
 Makefile
 config.h
-config.log
 config.status
 stamp-h1
 efm8flash
+check_crc16
 *.o
+*.log
+*.trs
+*.swp
+test-driver
+.dirstamp
