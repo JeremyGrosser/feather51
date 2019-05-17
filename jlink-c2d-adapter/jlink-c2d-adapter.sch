@@ -1,0 +1,197 @@
+EESchema Schematic File Version 4
+LIBS:jlink-c2d-adapter-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Connector_Generic:Conn_02x10_Odd_Even J1
+U 1 1 5CDDE238
+P 3400 2450
+F 0 "J1" H 3450 3067 50  0000 C CNN
+F 1 "JLINK" H 3450 2976 50  0000 C CNN
+F 2 "Connector_IDC:IDC-Header_2x10_P2.54mm_Vertical" H 3400 2450 50  0001 C CNN
+F 3 "~" H 3400 2450 50  0001 C CNN
+F 4 "75869-304LF" H 3400 2450 50  0001 C CNN "MPN"
+	1    3400 2450
+	1    0    0    -1  
+$EndComp
+Text Label 3200 2050 2    50   ~ 0
+VTref
+Text Label 3200 2150 2    50   ~ 0
+nTRST
+Text Label 3200 2250 2    50   ~ 0
+TDI
+Text Label 3200 2550 2    50   ~ 0
+RTCK
+Text Label 3200 2650 2    50   ~ 0
+TDO
+Text Label 3200 2750 2    50   ~ 0
+RESET
+Text Label 3200 2850 2    50   ~ 0
+DBGRQ
+NoConn ~ 3700 2050
+Wire Wire Line
+	3700 2150 3700 2250
+Connection ~ 3700 2250
+Wire Wire Line
+	3700 2250 3700 2350
+Connection ~ 3700 2350
+Wire Wire Line
+	3700 2350 3700 2450
+Connection ~ 3700 2450
+Wire Wire Line
+	3700 2450 3700 2550
+Connection ~ 3700 2550
+Wire Wire Line
+	3700 2550 3700 2650
+Connection ~ 3700 2650
+Wire Wire Line
+	3700 2650 3700 2750
+Connection ~ 3700 2750
+Wire Wire Line
+	3700 2750 3700 2850
+Connection ~ 3700 2850
+Wire Wire Line
+	3700 2850 3700 2950
+$Comp
+L power:GND #PWR0102
+U 1 1 5CDDEF6E
+P 3700 2950
+F 0 "#PWR0102" H 3700 2700 50  0001 C CNN
+F 1 "GND" H 3705 2777 50  0000 C CNN
+F 2 "" H 3700 2950 50  0001 C CNN
+F 3 "" H 3700 2950 50  0001 C CNN
+	1    3700 2950
+	1    0    0    -1  
+$EndComp
+Connection ~ 3700 2950
+$Comp
+L power:+5V #PWR0103
+U 1 1 5CDDF006
+P 3200 2950
+F 0 "#PWR0103" H 3200 2800 50  0001 C CNN
+F 1 "+5V" H 3215 3123 50  0000 C CNN
+F 2 "" H 3200 2950 50  0001 C CNN
+F 3 "" H 3200 2950 50  0001 C CNN
+	1    3200 2950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector_Generic:Conn_02x03_Odd_Even J2
+U 1 1 5CDE2A21
+P 4850 2600
+F 0 "J2" H 4900 2917 50  0000 C CNN
+F 1 "C2D" H 4900 2826 50  0000 C CNN
+F 2 "Connector_IDC:IDC-Header_2x03_P2.54mm_Vertical" H 4850 2600 50  0001 C CNN
+F 3 "~" H 4850 2600 50  0001 C CNN
+F 4 "75869-331LF" H 4850 2600 50  0001 C CNN "MPN"
+	1    4850 2600
+	1    0    0    -1  
+$EndComp
+Text Label 4650 2600 2    50   ~ 0
+TCK_C2CK
+Text Label 4650 2700 2    50   ~ 0
+~RESET
+$Comp
+L power:+3.3V #PWR02
+U 1 1 5CDE2B0D
+P 5150 2500
+F 0 "#PWR02" H 5150 2350 50  0001 C CNN
+F 1 "+3.3V" H 5165 2673 50  0000 C CNN
+F 2 "" H 5150 2500 50  0001 C CNN
+F 3 "" H 5150 2500 50  0001 C CNN
+	1    5150 2500
+	1    0    0    -1  
+$EndComp
+Text Label 5150 2600 0    50   ~ 0
+TMS_C2D
+$Comp
+L power:+5V #PWR01
+U 1 1 5CDE2C03
+P 4650 2500
+F 0 "#PWR01" H 4650 2350 50  0001 C CNN
+F 1 "+5V" H 4665 2673 50  0000 C CNN
+F 2 "" H 4650 2500 50  0001 C CNN
+F 3 "" H 4650 2500 50  0001 C CNN
+	1    4650 2500
+	1    0    0    -1  
+$EndComp
+Text Label 3200 2450 2    50   ~ 0
+TCK_C2CK
+Text Label 3200 2350 2    50   ~ 0
+TMS_C2D
+$Comp
+L power:GND #PWR0105
+U 1 1 5CDE3000
+P 5150 2700
+F 0 "#PWR0105" H 5150 2450 50  0001 C CNN
+F 1 "GND" H 5155 2527 50  0000 C CNN
+F 2 "" H 5150 2700 50  0001 C CNN
+F 3 "" H 5150 2700 50  0001 C CNN
+	1    5150 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR05
+U 1 1 5CDE3427
+P 5650 3250
+F 0 "#PWR05" H 5650 3000 50  0001 C CNN
+F 1 "GND" V 5655 3122 50  0000 R CNN
+F 2 "" H 5650 3250 50  0001 C CNN
+F 3 "" H 5650 3250 50  0001 C CNN
+	1    5650 3250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector:Conn_01x06_Male J4
+U 1 1 5CDE342D
+P 5450 3350
+F 0 "J4" H 5556 3728 50  0000 C CNN
+F 1 "EdgeClip" H 5556 3637 50  0000 C CNN
+F 2 "synack-common:CardEdge6P" H 5450 3350 50  0001 C CNN
+F 3 "~" H 5450 3350 50  0001 C CNN
+	1    5450 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR04
+U 1 1 5CDE3433
+P 5650 3150
+F 0 "#PWR04" H 5650 3000 50  0001 C CNN
+F 1 "+5V" H 5665 3323 50  0000 C CNN
+F 2 "" H 5650 3150 50  0001 C CNN
+F 3 "" H 5650 3150 50  0001 C CNN
+	1    5650 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+3.3V #PWR06
+U 1 1 5CDE3439
+P 5650 3350
+F 0 "#PWR06" H 5650 3200 50  0001 C CNN
+F 1 "+3.3V" V 5665 3478 50  0000 L CNN
+F 2 "" H 5650 3350 50  0001 C CNN
+F 3 "" H 5650 3350 50  0001 C CNN
+	1    5650 3350
+	0    1    1    0   
+$EndComp
+Text Label 5650 3450 0    50   ~ 0
+TCK_C2CK
+Text Label 5650 3550 0    50   ~ 0
+TMS_C2D
+Text Label 5650 3650 0    50   ~ 0
+~RESET
+Text Label 5150 2500 0    50   ~ 0
+VTref
+$EndSCHEMATC
