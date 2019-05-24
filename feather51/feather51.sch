@@ -259,17 +259,6 @@ F 3 "" H 800 850 50  0001 C CNN
 	1    800  850 
 	1    0    0    -1  
 $EndComp
-$Comp
-L Diode:1N5817 D1
-U 1 1 5CB3CD21
-P 1000 1000
-F 0 "D1" V 1046 921 50  0000 R CNN
-F 1 "1N5817" V 955 921 50  0000 R CNN
-F 2 "synack-common:DO-214AC" H 1000 825 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 1000 1000 50  0001 C CNN
-	1    1000 1000
-	0    -1   -1   0   
-$EndComp
 Text Label 1000 850  0    50   ~ 0
 VBAT
 Wire Wire Line
@@ -317,7 +306,7 @@ L Regulator_Linear:SPX3819M5-L-3-3 U1
 U 1 1 5CB3DE67
 P 1900 1350
 F 0 "U1" H 1900 1692 50  0000 C CNN
-F 1 "SPX3819M5-L-3-3" H 1900 1601 50  0000 C CNN
+F 1 "LP2985-33DBVR" H 1900 1601 50  0000 C CNN
 F 2 "Package_TO_SOT_SMD:SOT-23-5" H 1900 1675 50  0001 C CNN
 F 3 "https://www.exar.com/content/document.ashx?id=22106&languageid=1033&type=Datasheet&partnumber=SPX3819&filename=SPX3819.pdf&part=SPX3819" H 1900 1350 50  0001 C CNN
 	1    1900 1350
@@ -783,28 +772,6 @@ Text Label 3150 3000 0    50   ~ 0
 SCK
 Text Label 3150 2800 0    50   ~ 0
 MISO
-$Comp
-L Diode:1N5817 D2
-U 1 1 5CB7F2BA
-P 3300 4250
-F 0 "D2" V 3254 4329 50  0000 L CNN
-F 1 "1N5817" V 3345 4329 50  0000 L CNN
-F 2 "synack-common:DO-214AC" H 3300 4075 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 3300 4250 50  0001 C CNN
-	1    3300 4250
-	0    1    1    0   
-$EndComp
-$Comp
-L Diode:1N5817 D3
-U 1 1 5CB7F48A
-P 3750 4250
-F 0 "D3" V 3704 4329 50  0000 L CNN
-F 1 "1N5817" V 3795 4329 50  0000 L CNN
-F 2 "synack-common:DO-214AC" H 3750 4075 50  0001 C CNN
-F 3 "http://www.vishay.com/docs/88525/1n5817.pdf" H 3750 4250 50  0001 C CNN
-	1    3750 4250
-	0    1    1    0   
-$EndComp
 Wire Wire Line
 	3150 4100 3300 4100
 Wire Wire Line
@@ -917,4 +884,37 @@ Wire Notes Line
 	500  4750 5700 4750
 Wire Notes Line
 	5700 500  5700 4750
+$Comp
+L Device:D D1
+U 1 1 5CE7737D
+P 1000 1000
+F 0 "D1" V 1046 921 50  0000 R CNN
+F 1 "SS12" V 955 921 50  0000 R CNN
+F 2 "synack-common:DO-214AC" H 1000 1000 50  0001 C CNN
+F 3 "~" H 1000 1000 50  0001 C CNN
+	1    1000 1000
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:D D2
+U 1 1 5CE778CA
+P 3300 4250
+F 0 "D2" V 3254 4329 50  0000 L CNN
+F 1 "SS12" V 3345 4329 50  0000 L CNN
+F 2 "synack-common:DO-214AC" H 3300 4250 50  0001 C CNN
+F 3 "~" H 3300 4250 50  0001 C CNN
+	1    3300 4250
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D D3
+U 1 1 5CE7799E
+P 3750 4250
+F 0 "D3" V 3704 4329 50  0000 L CNN
+F 1 "SS12" V 3795 4329 50  0000 L CNN
+F 2 "synack-common:DO-214AC" H 3750 4250 50  0001 C CNN
+F 3 "~" H 3750 4250 50  0001 C CNN
+	1    3750 4250
+	0    1    1    0   
+$EndComp
 $EndSCHEMATC
